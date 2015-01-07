@@ -74,6 +74,6 @@ Requirements
 Execution
 =========
 
->   java -jar KingGameServer.jar [-p portNumber]
+>       java -jar KingGameServer.jar [-p portNumber]
 
 The argument `-p` is optional, if this argument is not present, the default port is 8081.
