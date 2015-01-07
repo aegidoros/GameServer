@@ -51,23 +51,22 @@ public class ScoreManagerTest {
         highScore = scoreManager.getHighScore(levelId);
         System.out.println("levelScore = " + highScore);
         Assert.assertEquals("HighScore Invalid", "42=500", highScore.toString());
-        UserScore userScore2 = new UserScore(userId, score+50);
+        UserScore userScore2 = new UserScore(userId, score + 50);
         scoreManager.saveScore(userScore2, levelId);
         highScore = scoreManager.getHighScore(levelId);
         System.out.println("levelScore = " + highScore);
         Assert.assertEquals("HighScore Invalid", "42=550", highScore.toString());
-        UserScore userScore3 = new UserScore(userId, score-50);
+        UserScore userScore3 = new UserScore(userId, score - 50);
         scoreManager.saveScore(userScore3, levelId);
         highScore = scoreManager.getHighScore(levelId);
         System.out.println("levelScore = " + highScore);
         Assert.assertEquals("HighScore Invalid", "42=550", highScore.toString());
-        UserScore userScore4 = new UserScore(userId, score+100);
+        UserScore userScore4 = new UserScore(userId, score + 100);
         scoreManager.saveScore(userScore4, levelId);
         highScore = scoreManager.getHighScore(levelId);
         System.out.println("levelScore = " + highScore);
         Assert.assertEquals("HighScore Invalid", "42=600", highScore.toString());
     }
-
 
 
     @Test
@@ -105,18 +104,20 @@ public class ScoreManagerTest {
     @Test
     public void testMaxLimitScore() throws Exception {
         int levelId = 4;
-        for(int i =1 ; i < 17; i++){
+        for (int i = 1; i < 16; i++) {
             UserScore userScore1 = new UserScore(i, i);
             scoreManager.saveScore(userScore1, levelId);
         }
-        int userId = 42;
-        int score = 500;
-        UserScore userScore = new UserScore(userId, score);
-        scoreManager.saveScore(userScore, levelId);
         HighScore highScore = scoreManager.getHighScore(levelId);
-        Assert.assertEquals("HighScore Invalid", "42=500", highScore.toString());
+        Assert.assertEquals("HighScore Invalid",
+                "15=15,14=14,13=13,12=12,11=11,10=10,9=9,8=8,7=7,6=6,5=5,4=4,3=3,2=2,1=1", highScore.toString());
+        int userId = 42;
+        UserScore userScore = new UserScore(userId, userId);
+        scoreManager.saveScore(userScore, levelId);
+        highScore = scoreManager.getHighScore(levelId);
+        Assert.assertEquals("HighScore Invalid",
+                "42=42,15=15,14=14,13=13,12=12,11=11,10=10,9=9,8=8,7=7,6=6,5=5,4=4,3=3,2=2", highScore.toString());
     }
-
 
 
     @Test
